@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interactive Tailwind Project</title>
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            .c1, .c2, .c3 {
+                transition: width 0.5s ease, border-radius 0.5s ease; /* Smooth transition */
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen">
+        <div class="flex gap-2 h-full max-w-4xl w-full aspect-video">
+            <div id="c1" class="flex bg-blue-500 c1" style="width: 50%; border-radius: 4rem;"></div>
+            <div id="c2" class="flex bg-blue-600 c2" style="width: 30%; border-radius: 4rem;"></div>
+            <div id="c3" class="flex bg-blue-700 c3" style="width: 20%; border-radius: 6rem;"></div>
+        </div>
+
+        <script>
+            const sections = {
+                c1: { width: "50%", radius: "4rem" },
+                c2: { width: "30%", radius: "4rem" },
+                c3: { width: "20%", radius: "6rem" },
+            };
+
+            const elements = {
+                c1: document.getElementById("c1"),
+                c2: document.getElementById("c2"),
+                c3: document.getElementById("c3"),
+            };
+
+            // Event listener for clicks
+            Object.keys(elements).forEach((id) => {
+                elements[id].addEventListener("mouseover", () => {
+                    if (id === "c1") {
+                        updateWidths("c1", "c2", "c3");
+                    } else if (id === "c2") {
+                        updateWidths("c2", "c3", "c1");
+                    } else {
+                        updateWidths("c3", "c2", "c1");
+                    }
+                });
+            });
+
+            function updateWidths(selected, second, third) {
+                elements[selected].style.width = sections.c1.width;
+                elements[selected].style.borderRadius = sections.c1.radius;
+
+                elements[second].style.width = sections.c2.width;
+                elements[second].style.borderRadius = sections.c2.radius;
+
+                elements[third].style.width = sections.c3.width;
+                elements[third].style.borderRadius = sections.c3.radius;
+            }
+        </script>
+    </body>
+</html>
