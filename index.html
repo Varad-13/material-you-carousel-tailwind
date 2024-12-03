@@ -35,7 +35,8 @@
 
             // Event listener for clicks
             Object.keys(elements).forEach((id) => {
-                elements[id].addEventListener("mouseover", () => {
+                // Define the handler function
+                const handler = () => {
                     if (id === "c1") {
                         updateWidths("c1", "c2", "c3");
                     } else if (id === "c2") {
@@ -43,8 +44,13 @@
                     } else {
                         updateWidths("c3", "c2", "c1");
                     }
-                });
+                };
+        
+                // Attach the event listeners for hover and tap
+                elements[id].addEventListener("mouseover", handler);
+                elements[id].addEventListener("touchstart", handler);
             });
+
 
             function updateWidths(selected, second, third) {
                 elements[selected].style.width = sections.c1.width;
